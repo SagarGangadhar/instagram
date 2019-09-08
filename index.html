@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Instagram</title>
+    <style>
+    @import url("https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+
+
+.card {
+    width: 616px;
+    height: 800px;
+    margin: 5px auto;
+    border: 1px solid #eee;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 70px;
+}
+
+.pro-img {
+
+}
+
+
+.pro-img img{
+	width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    vertical-align:middle
+}
+
+.more-option {
+	font-size: 18px;
+	font-weight: 900;
+}
+
+
+.pro-name{
+	font-size: 14px;
+	font-weight:600;
+	padding: 8px;
+	color: #262626;
+	font-family: sans-serif;
+}
+
+
+.main-container img{
+ width: 614px;
+ height: 614px;
+}
+
+
+.footer{
+	display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    height: 70px;
+}
+
+.glyphicon{
+	font-size: 25px;
+	font-weight: 100;
+}
+
+.views{
+	font-size: 14px;
+	font-weight:400;
+	padding: 8px;
+	color: #262626;
+	font-family: sans-serif;
+}
+    </style>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+    <div class="outer-block">
+    </div>
+   <script>
+   	$(document).ready(function() {
+
+	    $.get("https://api.jsonbin.io/b/5d75699a2d1fb96463cbbd42/4", function(data) {
+	       var obj=JSON.stringify(data);
+	       var newobj=JSON.parse(obj);
+	        //console.log(newobj);
+	        for(i=0;i<newobj.data.length;i++){
+	        	let data=newobj.data;
+	        	//console.log(data[i].profile_name);
+	        	let post_image=data[i].post_image;
+	        	let profile_name=data[i].profile_name;
+	        	let profile_picture=data[i].profile_picture;
+	        	let views=data[i].views;
+	        	console.log(post_image + profile_name + profile_picture + views  )
+	        	$(".outer-block").append('<div class="card"><div class="header"><div class="pro-img"><img src="'+profile_picture+'" /><span class="pro-name">'+profile_name+'</span>'+
+ 				'</div><div class="more-option">...</div></div>'+'<div class="main-container"><img src="'+post_image+'"/></div><div class="footer"><div class="glyphicon">'+
+                '<i class="glyphicon glyphicon-heart-empty"></i>'+
+                '<i class="glyphicon glyphicon-comment"></i><br />'+
+                '<span class="views">'+views+'</span><br />'+
+                '<span class="pro-name">'+profile_name+'</span>'+
+            '</div>'+
+            '<div class="bookmark">'+
+                '<i class="glyphicon glyphicon-bookmark"></i>'+
+            '</div>'+
+        '</div></div>')
+	        }
+	    });
+	});
+   </script>
+</body>
+
+</html>
